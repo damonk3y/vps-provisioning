@@ -6,11 +6,20 @@ echo "-> setup build-essentials"
 sudo apt-get install build-essential
 echo "-> setting up vps"
 sudo apt update
-sudo apt upgrade -y
+sudo apt upgrade -yls -la /usr/local/lib/docker/cli-plugins/
 echo "-> installing docker"
 sudo apt install -y docker.io
 echo "-> installing docker compose"
 sudo apt install -y docker-compose
+sudo apt-get update && sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 echo "-> installing git"
 sudo apt install -y git
 echo "-> installing curl"
