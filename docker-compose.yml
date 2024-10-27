@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: tardis_db
+      POSTGRES_USER: tardis_user
+      POSTGRES_PASSWORD: tardis_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - tardis_network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./www:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - tardis_network
+    restart: unless-stopped
+
+networks:
+  tardis_network:
+    name: tardis_shared_network
+    driver: bridge
+    external: true
+
+volumes:
+  postgres_data:
+    driver: local
