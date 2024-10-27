@@ -9,8 +9,7 @@ sudo apt update
 sudo apt upgrade -yls -la /usr/local/lib/docker/cli-plugins/
 echo "-> installing docker"
 sudo apt install -y docker.io
-echo "-> installing docker compose"
-sudo apt install -y docker-compose
+echo "-> extra docker setup"
 sudo apt-get update && sudo apt-get install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
