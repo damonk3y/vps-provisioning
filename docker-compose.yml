@@ -17,7 +17,8 @@ services:
     restart: unless-stopped
 
   nginx:
-    build: Dockerfile.nginx
+    context: .
+    dockerfile: Dockerfile.nginx
     container_name: nginx_server
     ports:
       - "80:80"
