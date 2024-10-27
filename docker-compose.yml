@@ -17,7 +17,6 @@ services:
     restart: unless-stopped
 
   nginx:
-    context: .
     dockerfile: Dockerfile.nginx
     container_name: nginx_server
     ports:
