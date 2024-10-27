@@ -35,6 +35,8 @@ if [ ! -f ~/.keys/github ]; then
     echo "-> setting up github ssh key"
     mkdir -p ~/.keys
     ssh-keygen -t ed25519 -f ~/.keys/github -N ""
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.keys/github
 fi
 
-docker network create tardis_shared_network
+sudo docker network create tardis_shared_network
