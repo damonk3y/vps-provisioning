@@ -22,7 +22,6 @@ services:
       dockerfile: Dockerfile.nginx
     container_name: nginx_server
     ports:
-      - "80:80"
       - "443:443"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
