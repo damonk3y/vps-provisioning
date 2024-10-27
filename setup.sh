@@ -2,6 +2,8 @@
 
 set -e
 
+echo "-> setup build-essentials"
+sudo apt-get install build-essential
 echo "-> setting up vps"
 sudo apt update
 sudo apt upgrade -y
