@@ -6,8 +6,8 @@ COPY ./www/404.html /usr/share/nginx/html/404.html
 COPY ./www/50x.html /usr/share/nginx/html/50x.html
 COPY ./www/index.html /usr/share/nginx/html/index.html
 
-COPY ../.certs/cloudflare/cert.key /etc/nginx/ssl/private.key
-COPY ../.certs/cloudflare/cert.pem /etc/nginx/ssl/cert.pem
+COPY ./certs/cert.pem /etc/nginx/ssl/server.pem
+COPY ./certs/cert.key /etc/nginx/ssl/server.key
 
 EXPOSE 80
 EXPOSE 443
