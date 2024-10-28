@@ -39,9 +39,6 @@ sudo apt install -y vim
 if [ ! -f ~/.keys/github ]; then
     echo "-> setting up github ssh key"
     mkdir -p ~/.keys
-    ssh-keygen -t ed25519 -f ~/.keys/github -N ""
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.keys/github
 fi
 
 sudo docker network create tardis_shared_network
