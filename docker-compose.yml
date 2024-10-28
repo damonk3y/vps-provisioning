@@ -4,8 +4,8 @@ services:
     container_name: postgres_db
     environment:
       POSTGRES_DB: tardis_db
-      POSTGRES_USER: tardis_user
-      POSTGRES_PASSWORD: tardis_password
+      POSTGRES_USER: ${POSTGRES_USER:-tardis_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tardis_password}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -35,8 +35,8 @@ services:
     image: minio/minio
     container_name: minio_storage
     environment:
-      MINIO_ROOT_USER: minio_user
-      MINIO_ROOT_PASSWORD: minio_password
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio_user}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_password}
     command: server --console-address ":9001" /data
     ports:
       - "9000:9000"
