@@ -5,28 +5,8 @@ set -e
 echo "-> setup build-essentials"
 sudo apt-get install build-essential
 echo "-> setting up vps"
-sudo apt update
-sudo apt upgrade -yls -la /usr/local/lib/docker/cli-plugins/
-echo "-> installing docker"
-sudo apt install -y docker.io
-echo "-> extra docker setup"
-sudo apt-get update && sudo apt-get install ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-echo "-> installing git"
-sudo apt install -y git
-echo "-> installing curl"
-sudo apt install -y curl
-echo "-> installing vim"
-sudo apt install -y vim
-echo "-> installing neovim"
-sudo apt install -y neovim
+sudo apt-get update
+sudo apt-get upgrade
 if ! command -v zsh &> /dev/null
 then
     echo "-> installing zsh"
@@ -41,6 +21,21 @@ then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     rm -rf zsh-syntax-highlighting
 fi
+echo "-> installing docker"
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+apt-cache policy docker-ce
+sudo apt install docker-ce
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
+echo "-> installing git"
+sudo apt install -y git
+echo "-> installing curl"
+sudo apt install -y curl
+echo "-> installing vim"
+sudo apt install -y vim
 if [ ! -f ~/.keys/github ]; then
     echo "-> setting up github ssh key"
     mkdir -p ~/.keys
