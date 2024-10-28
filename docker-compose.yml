@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15-alpine
@@ -33,6 +31,22 @@ services:
       - tardis_network
     restart: unless-stopped
 
+  minio:
+    image: minio/minio
+    container_name: minio_storage
+    environment:
+      MINIO_ROOT_USER: minio_user
+      MINIO_ROOT_PASSWORD: minio_password
+    command: server --console-address ":9001" /data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - tardis_network
+    restart: unless-stopped
+
 networks:
   tardis_network:
     name: tardis_shared_network
@@ -41,4 +55,6 @@ networks:
 
 volumes:
   postgres_data:
+    driver: local
+  minio_data:
     driver: local
