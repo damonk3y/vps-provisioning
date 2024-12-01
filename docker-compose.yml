@@ -20,9 +20,6 @@ services:
       POSTGRES_DB: tardis_db
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST_AUTH_METHOD: md5
-      POSTGRES_INITDB_ARGS: --auth-host=md5
-    command: postgres -c listen_addresses='*'
     volumes:
       - postgres_data:/var/lib/postgresql/data:Z
       
