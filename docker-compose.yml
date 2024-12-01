@@ -29,6 +29,7 @@ services:
       - "5432:5432"
     networks:
       - tardis_network
+    network_mode: "host"
     restart: unless-stopped
 
   nginx:
