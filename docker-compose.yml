@@ -20,12 +20,10 @@ services:
       POSTGRES_DB: test
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
-      POSTGRES_HOST_AUTH_METHOD: md5
-      POSTGRES_INITDB_ARGS: --auth-host=md5
-    command: postgres -c listen_addresses='*'
     volumes:
       - postgres_data:/var/lib/postgresql/data:Z
-      
+      - ./postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     ports:
       - "5432:5432"
     networks:
