@@ -1,4 +1,18 @@
 services:
+  beyoutique-crm:
+    build:
+      context: ../beyoutique-monolith
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+      - nginx
+      - minio
+    networks:
+      - tardis_network
+    restart: unless-stopped
+
   db:
     image: postgres:15-alpine
     container_name: postgres_db
