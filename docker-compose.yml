@@ -24,12 +24,12 @@ services:
       POSTGRES_INITDB_ARGS: --auth-host=md5
     command: postgres -c listen_addresses='*'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data:Z
+      
     ports:
       - "5432:5432"
     networks:
       - tardis_network
-    network_mode: "host"
     restart: unless-stopped
 
   nginx:
