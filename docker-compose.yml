@@ -18,10 +18,11 @@ services:
     container_name: postgres_db
     environment:
       POSTGRES_DB: tardis_db
-      POSTGRES_USER: ${POSTGRES_USER:-tardis_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tardis_password}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_HOST_AUTH_METHOD: md5
       POSTGRES_INITDB_ARGS: --auth-host=md5
+    command: postgres -c listen_addresses='*'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
