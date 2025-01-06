@@ -1,13 +1,10 @@
 services:
   beyoutique-crm:
-    build:
-      context: ../beyoutique-monolith
-      dockerfile: Dockerfile
+    image: beyoutique-crm
     ports:
       - "8080:8080"
     depends_on:
       - db
-      - nginx
       - minio
     networks:
       - tardis_network
@@ -15,7 +12,7 @@ services:
 
   db:
     image: postgres:15-alpine
-    container_name: postgres_db
+    container_name: postgres-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -31,10 +28,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    container_name: nginx_server
+    image: beyoutique-nginx
     ports:
       - "80:80"
       - "443:443"
@@ -43,16 +37,17 @@ services:
       - ./www:/var/www/html
     depends_on:
       - db
+      - beyoutique-crm
     networks:
       - tardis_network
     restart: unless-stopped
 
   minio:
     image: minio/minio
-    container_name: minio_storage
+    container_name: minio-storage
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio_user}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_password}
+      MINIO_ROOT_USER: ${MINI_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server --console-address ":9001" /data
     ports:
       - "9000:9000"
