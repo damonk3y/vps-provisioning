@@ -3,20 +3,17 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
-common:
-  instance_interface_names:
-    - "lo"
-
-ring:
-  instance_interface_names:
-    - "lo"
-
 ingester:
   lifecycler:
     ring:
       kvstore:
         store: inmemory
       replication_factor: 1
+      instance_interface_names:
+        - "lo"
+      common:
+      instance_interface_names:
+        - "lo"
   chunk_idle_period: 5m
   max_chunk_age: 1h
   chunk_retain_period: 30s
