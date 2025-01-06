@@ -67,9 +67,11 @@ services:
     volumes:
       - ./loki-config.yml:/etc/loki/config.yml
       - loki_data:/loki
+      - loki_wal:/wal
     networks:
       - tardis_network
     restart: unless-stopped
+    user: root
 
   promtail:
     image: grafana/promtail:2.8.0
