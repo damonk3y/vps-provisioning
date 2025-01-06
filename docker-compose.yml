@@ -63,8 +63,9 @@ services:
     container_name: loki
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/config.yml
     volumes:
+      - ./loki-config.yml:/etc/loki/config.yml
       - loki_data:/loki
     networks:
       - tardis_network
@@ -76,12 +77,15 @@ services:
     volumes:
       - /var/log:/var/log
       - ./promtail:/etc/promtail
-    command: -config.file=/etc/promtail/config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: -config.file=/etc/promtail/config.yml -config.expand-env=true
     depends_on:
       - loki
     networks:
       - tardis_network
     restart: unless-stopped
+    user: root
+    privileged: true
 
   grafana:
     image: grafana/grafana:latest
