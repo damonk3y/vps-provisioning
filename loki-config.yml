@@ -7,11 +7,13 @@ common:
   instance_interface_names:
     - "lo"
 
+ring:
+  instance_interface_names:
+    - "lo"
+
 ingester:
   lifecycler:
     ring:
-      instance_interface_names:
-        - "lo"
       kvstore:
         store: inmemory
       replication_factor: 1
