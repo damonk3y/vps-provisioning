@@ -5,6 +5,7 @@ services:
       - "8080:8080"
     depends_on:
       - db
+      - grafana
       - minio
     networks:
       - tardis_network
@@ -23,6 +24,9 @@ services:
     command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     ports:
       - "5432:5432"
+    depends_on:
+      - grafana
+      - minio
     networks:
       - tardis_network
     restart: unless-stopped
@@ -38,6 +42,7 @@ services:
     depends_on:
       - db
       - beyoutique-crm
+      - grafana
     networks:
       - tardis_network
     restart: unless-stopped
@@ -52,6 +57,8 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    depends_on:
+      - grafana
     volumes:
       - minio_data:/data
     networks:
