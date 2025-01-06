@@ -9,10 +9,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   db:
     image: postgres:15-alpine
@@ -30,10 +26,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   nginx:
     image: beyoutique-nginx
@@ -49,10 +41,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   minio:
     image: minio/minio
@@ -69,10 +57,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   loki:
     image: grafana/loki:2.8.0
@@ -87,10 +71,6 @@ services:
       - tardis_network
     restart: unless-stopped
     user: root
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   promtail:
     image: grafana/promtail:latest
@@ -105,10 +85,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
   grafana:
     image: grafana/grafana:latest
@@ -126,10 +102,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 
 networks:
   tardis_network:
