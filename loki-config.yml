@@ -3,6 +3,14 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
+common:
+  instance_interface_names:
+    - "lo"
+
+ring:
+  instance_interface_names:
+    - "lo"
+
 ingester:
   lifecycler:
     ring:
