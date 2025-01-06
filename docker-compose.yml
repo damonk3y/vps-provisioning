@@ -76,9 +76,16 @@ services:
     image: grafana/promtail:2.8.0
     container_name: promtail
     volumes:
-      - /var/log:/var/log
-      - ./promtail:/etc/promtail
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - type: bind
+        source: /var/log
+        target: /var/log
+      - type: bind
+        source: ./promtail
+        target: /etc/promtail
+      - type: bind
+        source: /var/lib/docker/containers
+        target: /var/lib/docker/containers
+        read_only: true
     command: -config.file=/etc/promtail/config.yml -config.expand-env=true
     depends_on:
       - loki
