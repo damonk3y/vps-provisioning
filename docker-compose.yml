@@ -73,27 +73,18 @@ services:
     user: root
 
   promtail:
-    image: grafana/promtail:1.5.0
+    image: grafana/promtail:latest
     container_name: promtail
     volumes:
-      - type: bind
-        source: /var/log
-        target: /var/log
-      - type: bind
-        source: ./promtail
-        target: /etc/promtail
-      - type: bind
-        source: /var/lib/docker/containers
-        target: /var/lib/docker/containers
-        read_only: true
-    command: -config.expand-env=true -log.level=debug
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - /var/log:/var/log
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: -config.file=/etc/promtail/config.yml
     depends_on:
       - loki
     networks:
       - tardis_network
     restart: unless-stopped
-    user: root
-    privileged: true
 
   grafana:
     image: grafana/grafana:latest
