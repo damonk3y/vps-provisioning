@@ -3,7 +3,6 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
-ingestion_rate_strategy: global
 ingester:
   lifecycler:
     ring:
