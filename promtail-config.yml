@@ -12,9 +12,81 @@ scrape_configs:
   - job_name: "docker-logs"
     pipeline_stages:
       - docker: {}
+      - labels:
+          container_name:
     static_configs:
       - targets:
           - localhost
         labels:
           job: "docker"
           __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "beyoutique-crm"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: beyoutique-crm
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "postgres"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: postgres-db
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "nginx"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: nginx
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "minio"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: minio-storage
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "loki"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: loki
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "promtail"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: promtail
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  - job_name: "grafana"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          service: grafana
+          __path__: /var/lib/docker/containers/*/*-json.log</edit>
