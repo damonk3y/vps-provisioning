@@ -105,8 +105,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - target: 9999
-        published: 9999
+      - target: 7007
+        published: 7007
         protocol: tcp
         mode: host
     networks:
