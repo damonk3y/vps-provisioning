@@ -10,6 +10,10 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
 
   db:
     image: postgres:15-alpine
@@ -30,6 +34,10 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
 
   nginx:
     image: beyoutique-nginx
@@ -46,6 +54,10 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
 
   minio:
     image: minio/minio
@@ -64,6 +76,10 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
 
   loki:
     image: grafana/loki:2.8.0
