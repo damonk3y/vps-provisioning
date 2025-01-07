@@ -10,18 +10,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
     logging:
-      driver: loki
+      driver: "json-file"
       options:
-        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
-        loki-retries: "5"
-        loki-timeout: "10s"
-        loki-pipeline-stages: |
-          - match:
-              selector: '{container_name=~".+"}'
-              stages:
-                - labels:
-                    plugin: ''
+        max-size: "10m"
+        max-file: "3"
 
   db:
     image: postgres:15-alpine
@@ -42,12 +38,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
     logging:
-      driver: loki
+      driver: "json-file"
       options:
-        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
-        loki-retries: "5"
-        loki-timeout: "10s"
+        max-size: "10m"
+        max-file: "3"
 
   nginx:
     image: beyoutique-nginx
@@ -64,12 +62,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
     logging:
-      driver: loki
+      driver: "json-file"
       options:
-        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
-        loki-retries: "5"
-        loki-timeout: "10s"
+        max-size: "10m"
+        max-file: "3"
 
   minio:
     image: minio/minio
@@ -88,12 +88,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
     logging:
-      driver: loki
+      driver: "json-file"
       options:
-        loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
-        loki-retries: "5"
-        loki-timeout: "10s"
+        max-size: "10m"
+        max-file: "3"
 
   loki:
     image: grafana/loki:2.8.0
@@ -112,6 +114,14 @@ services:
       - JAEGER_AGENT_HOST=tempo
       - JAEGER_SAMPLER_TYPE=const
       - JAEGER_SAMPLER_PARAM=1
+    deploy:
+      labels:
+        - "logging=loki"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   promtail:
     image: grafana/promtail:latest
@@ -126,6 +136,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   grafana:
     image: grafana/grafana:latest
@@ -143,6 +161,14 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
+    deploy:
+      labels:
+        - "logging=loki"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   tardis_network:
