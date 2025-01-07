@@ -16,6 +16,12 @@ services:
         loki-url: "http://beyoutique_loki:3100/loki/api/v1/push"
         loki-retries: "5"
         loki-timeout: "10s"
+        loki-pipeline-stages: |
+          - match:
+              selector: '{container_name=~".+"}'
+              stages:
+                - labels:
+                    plugin: ''
 
   db:
     image: postgres:15-alpine
