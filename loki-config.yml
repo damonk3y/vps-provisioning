@@ -2,10 +2,10 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
-  http_server_read_timeout: 60s
-  http_server_write_timeout: 60s
-  grpc_server_max_recv_msg_size: 67108864 # 64MB
-  grpc_server_max_send_msg_size: 67108864 # 64MB
+  http_server_read_timeout: 300s # Increased from 60s to handle longer request timeouts
+  http_server_write_timeout: 300s # Increased from 60s to handle longer response timeouts
+  grpc_server_max_recv_msg_size: 104857600 # Increased to 100MB
+  grpc_server_max_send_msg_size: 104857600 # Increased to 100MB
 
 ingester:
   lifecycler:
@@ -45,8 +45,8 @@ limits_config:
   reject_old_samples: true
   reject_old_samples_max_age: 168h
   max_entries_limit_per_query: 5000
-  ingestion_rate_mb: 30
-  ingestion_burst_size_mb: 60
+  ingestion_rate_mb: 60 # Doubled from 30
+  ingestion_burst_size_mb: 120 # Doubled from 60
   max_global_streams_per_user: 10000
   ingestion_rate_strategy: global
 

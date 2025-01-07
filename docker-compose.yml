@@ -110,10 +110,6 @@ services:
       - tardis_network
     restart: unless-stopped
     user: root
-    environment:
-      - JAEGER_AGENT_HOST=tempo
-      - JAEGER_SAMPLER_TYPE=const
-      - JAEGER_SAMPLER_PARAM=1
     deploy:
       labels:
         - "logging=loki"
