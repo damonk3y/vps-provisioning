@@ -11,7 +11,6 @@ services:
       - minio
     networks:
       - tardis_network
-    restart: unless-stopped
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -45,7 +44,6 @@ services:
       - minio
     networks:
       - tardis_network
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
@@ -71,7 +69,6 @@ services:
       - beyoutique-crm
     networks:
       - tardis_network
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
@@ -97,7 +94,6 @@ services:
       - minio_data:/data
     networks:
       - tardis_network
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
