@@ -12,9 +12,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    deploy:
-      labels:
-        - "logging=loki"
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -45,9 +42,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    deploy:
-      labels:
-        - "logging=loki"
 
   nginx:
     image: beyoutique-nginx
@@ -69,9 +63,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    deploy:
-      labels:
-        - "logging=loki"
 
   minio:
     image: minio/minio
@@ -94,9 +85,6 @@ services:
     networks:
       - tardis_network
     restart: unless-stopped
-    deploy:
-      labels:
-        - "logging=loki"
 
 networks:
   tardis_network:
