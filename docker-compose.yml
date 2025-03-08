@@ -136,6 +136,9 @@ services:
         mode: host
     networks:
       - tardis_network
+    environment:
+      - DOZZLE_AUTH=true
+      - DOZZLE_AUTH_PROVIDER=simple
     logging:
       driver: json-file
       options:
