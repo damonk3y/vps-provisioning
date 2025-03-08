@@ -138,7 +138,7 @@ services:
     environment:
       - DOZZLE_AUTH=true
     secrets:
-      - source: dozzle-users.yml
+      - source: ./dozzle-users.yml
         target: /dozzle/config/dozzle-users.yml
     logging:
       driver: json-file
