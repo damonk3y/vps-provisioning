@@ -134,6 +134,9 @@ services:
         mode: host
     networks:
       - tardis_network
+    secrets:
+      users:
+        file: dozzle-users.yml
     logging:
       driver: json-file
       options:
