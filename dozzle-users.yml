@@ -1,0 +1,6 @@
+users:
+    admin:
+        email: me@damonk3y.xyz
+        name: Admin
+        password: $2a$11$Qdwp2Tp22x9D8guAKMV4we3TQC19/.FM25UiJ6TUZ0q7hPQN0j8P.
+        filter: ""
