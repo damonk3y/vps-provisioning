@@ -137,6 +137,9 @@ services:
       - tardis_network
     environment:
       - DOZZLE_AUTH=true
+    secrets:
+      - source: dozzle-users
+        target: users
     logging:
       driver: json-file
       options:
@@ -154,3 +157,7 @@ volumes:
     driver: local
   minio_data:
     driver: local
+
+secrets:
+  dozzle-users:
+    file: ./dozzle-users.yml
