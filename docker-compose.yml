@@ -137,9 +137,9 @@ services:
       - tardis_network
     environment:
       - DOZZLE_AUTH=true
-    secrets:
-      - source: dozzle-users
-        target: users
+      - DOZZLE_AUTH_PROVIDER=simple
+      - DOZZLE_USERNAME=${admin}
+      - DOZZLE_PASSWORD=${admin}
     logging:
       driver: json-file
       options:
