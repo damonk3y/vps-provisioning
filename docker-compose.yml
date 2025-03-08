@@ -128,7 +128,7 @@ services:
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./dozzle/users.yml:/app/users.yml
+      - ./dozzle-users.yml:/app/users.yml
     ports:
       - target: 8080
         published: 9999
