@@ -128,6 +128,7 @@ services:
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./users:/data
     ports:
       - target: 8080
         published: 9999
@@ -135,6 +136,8 @@ services:
         mode: host
     networks:
       - tardis_network
+    environment:
+      DOZZLE_AUTH_PROVIDER: simple
     logging:
       driver: json-file
       options:
