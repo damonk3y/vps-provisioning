@@ -27,6 +27,26 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  beyoutique-telemetrist:
+    image: beyoutique-telemetrist
+    ports:
+      - target: 8199
+        published: 8199
+        protocol: tcp
+        mode: host
+    networks:
+      - tardis_network
+    environment:
+      - PORT=8199
+      - TELEMETRIST_ENABLED=true
+      - TELEMETRIST_INTERVAL=60
+      - TELEMETRIST_METRICS_PORT=8199
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   db:
     image: postgres:15-alpine
     environment:
